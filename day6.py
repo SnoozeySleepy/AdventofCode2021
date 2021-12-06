@@ -2,19 +2,17 @@
 
 from collections import Counter
 
+# don't track each individual lanternfish
+# track only cohorts (= 9)
 def shift(population, n):
     # index: day of the cycle (0..8)
     # variable: number of lanternfish in this day of the cycle
-    p = [0] * 9
-    for k,v in Counter(population).items():
-        p[k] = v
-
+    c = Counter(population)
+    p = [c[i] for i in range(9)]
     # n: iterations / days to simulate
     for i in range(n):
-        q = p[1:] # shift whole popluation
-        q.append(p[0]) # new lanternfish
-        q[6] += p[0] # reenter 7 day cycle
-        p = q
+        p.append(p.pop(0)) # shift the whole population and add the new lanternfish
+        p[6] += p[-1] # reenter 7 day cycle
     return sum(p) # total number of lanternfish after n days
 
 if __name__ == "__main__":
