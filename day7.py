@@ -8,9 +8,10 @@ def fuel(crabs, p, cost):
 def cost1(n): # linear cost
     return n
 
-def cost2(n): # cumulative cost: 1+2+3...
-    return int(n * (n+1) / 2)
+def cost2(n): # arithemtic sum
+    return n * (n+1) // 2
 
+# this approach works with any cost function
 if __name__ == "__main__":
     with open("day7_input") as fh:
         crabs = [int(x) for x in fh.readline().strip().split(',')]
