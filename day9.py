@@ -30,16 +30,14 @@ print(f"Part 1: Sum of the risk levels: {risksum}")
 # recursive fill algorithm
 # fill with 9s and count the filled-in 9s
 def fill_hmap(row, col, c):
-    if hmap[row][col] == 9:
-        return c
-    else:
+    if hmap[row][col] != 9:
         c += 1 # count the number of filled-in 9s
         hmap[row][col] = 9 # fill
         c = fill_hmap(row, col+1, c)
         c = fill_hmap(row, col-1, c)
         c = fill_hmap(row+1, col, c)
         c = fill_hmap(row-1, col, c)
-        return c
+    return c
 
 basins = []
 for row in range(1, len(hmap)-1):
