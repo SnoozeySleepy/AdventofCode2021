@@ -26,3 +26,10 @@ if __name__ == "__main__":
     limits = range(min(crabs), max(crabs) +1)
     print(f"Part 1 fuel cost: {f(min(limits, key=f))}")
     print(f"Part 2 fuel cost: {g(min(limits, key=g))}")
+
+    # Alternative
+    part1 = min( [sum([abs(p-x) for x in crabs]) for p in range(min(crabs), max(crabs)+1)] )
+    print(f"Part1 fuel cost: {part1}")
+
+    part2 = min( [sum([cost2(abs(p-x)) for x in crabs]) for p in range(min(crabs), max(crabs)+1)] )
+    print(f"Part2 fuel cost: {part2}")

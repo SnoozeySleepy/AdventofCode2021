@@ -22,7 +22,7 @@ for row in range(1, len(hmap)-1):
     for col in range(1, len(hmap[0])-1):
         # find the local minima
         if hmap[row][col] < min([hmap[row+1][col],hmap[row-1][col],
-                                    hmap[row][col+1],hmap[row][col-1]]):
+                                 hmap[row][col+1],hmap[row][col-1]]):
             risksum += hmap[row][col] + 1 # risk = height + 1
 
 print(f"Part 1: Sum of the risk levels: {risksum}")

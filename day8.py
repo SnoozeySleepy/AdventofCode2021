@@ -45,16 +45,16 @@ with open("day8_input") as fh:
             l = len(p)
             p = set(p)
             if l == 6: # 0,6,9
-                if (id[1] | id[4] | id[7]).issubset(p):
+                if id[4].issubset(p):
                     id[9] = p
-                elif (id[1] | id[7]).issubset(p) and not id[4].issubset(p):
+                elif id[1].issubset(p):
                     id[0] = p
                 else:
                     id[6] = p
             elif l == 5: # 2,3,5
                 if (id[4] - id[1]).issubset(p):
                     id[5] = p
-                elif (id[1] | id[7]).issubset(p):
+                elif id[1].issubset(p):
                     id[3] = p
                 else:
                     id[2] = p
