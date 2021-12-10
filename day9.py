@@ -7,6 +7,8 @@ with open("day9_input") as fh:
 hmap = [[int(y) for y in x.strip()] for x in lines]
 
 # add 9's around the edges of the height map; simplifies further processing
+# padding of the top and left sides are not stricly needed
+# if loops start at row/col = 0/0 since [-1] contains 9
 # add 9 to the beginning and end of each row
 for i in range(len(hmap)):
     hmap[i].append(9)
