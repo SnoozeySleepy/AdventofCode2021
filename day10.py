@@ -24,8 +24,8 @@ for n in nav:
         ascore = 0
         while stack: # incomplete line
             ascore = 5 * ascore + apoints[stack.pop()]
-        ascores.append(ascore)
+        if ascore > 0: # don't add a score if the line is complete and correct
+            ascores.append(ascore)
 
 print(f"Part 1: Syntax error score: {score}")
-ascores.sort()
-print(f"Part 2: autocomplete score: {ascores[len(ascores)//2]}")
+print(f"Part 2: autocomplete score: {sorted(ascores)[len(ascores)//2]}")
