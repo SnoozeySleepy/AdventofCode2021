@@ -12,8 +12,7 @@ def fold(dots, instructions):
                 x = 2*d - x
             if axis == 'y' and y > d:
                 y = 2*d - y
-            if (x,y) not in folded:
-                folded.add((x,y))
+            folded.add((x,y))
         dots = folded
     return dots
 
