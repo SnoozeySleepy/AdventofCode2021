@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 
 # fold dots according to the axis, 'x' or 'y', and the distance d
-def fold(dots, axis, d):
-    folded = []
-    for x,y in dots:
-        if axis == 'x' and x > d:
-            x = 2*d - x
-        if axis == 'y' and y > d:
-            y = 2*d - y
-        if (x,y) not in folded:
-            folded.append((x,y))
-    return folded
+def fold(dots, instructions):
+    for axis, d in instructions:
+        folded = []
+        for x,y in dots:
+            if axis == 'x' and x > d:
+                x = 2*d - x
+            if axis == 'y' and y > d:
+                y = 2*d - y
+            if (x,y) not in folded:
+                folded.append((x,y))
+        dots = folded
+    return dots
 
 # print the dots
 def print_dots(dots):
-    dots.sort() # sort by x first
+    dots = sorted(dots) # sort by x first
     xmax = dots[-1][0]
     dots.sort(key=lambda dots: dots[1]) # sort by y
     ymax = dots[-1][1]
@@ -37,7 +39,7 @@ if __name__ == "__main__":
         while line != '':
             p = line.strip().split(',')
             if len(p) == 2:
-                dots.append( (list(map(int, p))) )
+                dots.append(tuple(map(int, p)))
             else:
                 q = line.strip().split()
                 if len(q) == 3:
@@ -46,13 +48,9 @@ if __name__ == "__main__":
             line = fh.readline()
 
     # Part 1: fold once
-    axis, d = instructions.pop(0)
-    dots = fold(dots, axis, d)
+    dots = fold(dots, instructions[:1])
     print(f"Part 1: number of dots after first fold: {len(dots)}")
 
     # Part 2: perform the remaining foldings
-    for axis, d in instructions:
-        dots = fold(dots, axis, d)
-
     print("Part 2: eight capital letters code:")
-    print_dots(dots)
+    print_dots(fold(dots, instructions[1:]))
