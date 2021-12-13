@@ -6,14 +6,14 @@ from timeit import default_timer as timer
 def fold(dots, instructions):
     # loop through all folding instructions
     for axis, d in instructions:
-        folded = set()
+        folded = []
         for x,y in dots:
             if axis == 'x' and x > d:
                 x = 2*d - x
             if axis == 'y' and y > d:
                 y = 2*d - y
             if (x,y) not in folded:
-                folded.add((x,y))
+                folded.append((x,y))
         dots = folded
     return dots
 
@@ -26,7 +26,7 @@ def print_dots(dots):
         print("".join('#' if (x,y) in dots else " " for x in range(xmax + 1)))
 
 if __name__ == "__main__":
-    dots = set() # set of dot tuples, e.g. (2,23)
+    dots = [] # list of dot tuples, e.g. (2,23)
     instructions = [] # folding instructions, e.g. ('x', 15)
 
     with open("day13_input") as fh:
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         while line != '':
             p = line.strip().split(',')
             if len(p) == 2:
-                dots.add(tuple(map(int, p)))
+                dots.append(tuple(map(int, p)))
             else:
                 q = line.strip().split()
                 if len(q) == 3:
@@ -43,7 +43,7 @@ if __name__ == "__main__":
             line = fh.readline()
 
     start = timer()
-    
+
     # Part 1: fold once
     first = fold(dots, instructions[:1])
     print(f"Part 1: number of dots after first fold: {len(first)}")
